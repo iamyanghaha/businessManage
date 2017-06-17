@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.businessManage.wages.dao.WagesMapper">
+	
+	<select id="selectAll11" resultType="map">
+		SELECT * FROM jobSal
+	</select>
+	
+	<select id="selectAll" resultType="map">
+		SELECT * FROM jobSal
+	</select>
+	
+	<insert id="addWages" parameterType="map">
+		INSERT INTO jobSal VALUES(null, #{num}, #{name}, #{balansal}, #{jobsal},#{addsal},#{jxsal},#{glsal},#{sum});
+	</insert>
+	
+	<delete id="deleteWages" parameterType="map">
+		DELETE FROM jobSal WHERE id = #{id}
+	</delete>
+	
+	<update id="updateWages" parameterType="map">
+		UPDATE jobSal SET num=#{num}, name=#{name}, balansal=#{balansal}, jobsal=#{jobsal},addsal=#{addsal},jxsal=#{jxsal},glsal=#{glsal},sum=#{sum} where id=#{id}
+	</update>
+	
+</mapper>
