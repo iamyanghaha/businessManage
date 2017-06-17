@@ -24,23 +24,29 @@ public class NewsServiceImpl implements NewsService{
 	 * 查询所有新闻
 	 */
 	public void selectAllNews(InputObject inputObject, OutputObject outputObject) throws Exception{
+		//得到前台传过来的所有参数
 		Map<String, Object> map = inputObject.getParams();
 		
 		//得到分页参数
-//		int pageNum = Integer.parseInt((String) map.get("pageNum"));//第几页
-//		int onePageCount = Integer.parseInt((String) map.get("onePageCount"));//一页有多少条内容
+		int pageNum = Integer.parseInt((String) map.get("pageNum"));//第几页
+		int onePageCount = Integer.parseInt((String) map.get("onePageCount"));//一页有多少条内容
 		
 		//调用数据库查新所有新闻
-//		List<Map<String,Object>> allNews = newsMapper.selectAllNews(new PageBounds(pageNum, onePageCount, true));
-		List<Map<String,Object>> allNews = newsMapper.selectAllNews();
+		List<Map<String,Object>> allNews = newsMapper.selectAllNews(map, new PageBounds(pageNum, onePageCount, true));
 		
 		//获取新闻总数
-//		PageList<Map<String, Object>> abilityInfoPageList = (PageList<Map<String, Object>>)allNews;
-//		int total = abilityInfoPageList.getPaginator().getTotalCount();
+		PageList<Map<String, Object>> abilityInfoPageList = (PageList<Map<String, Object>>)allNews;
+		int totalNews = abilityInfoPageList.getPaginator().getTotalCount();
 		
-		//将查询出来的所有新闻放进outputObject
-		outputObject.setBeans(allNews);
-//		outputObject.settotal(total);
+		//计算总页数
+		int totalPages = totalNews / onePageCount;
+		if(totalNews % onePageCount > 0){
+			totalPages++;
+		}
+		
+		//将数据以json形式传给前台
+		outputObject.setBeans(allNews);//拔查询到的新闻放进output
+		outputObject.settotal(totalPages);//把总页数设置进output
 		outputObject.setreturnCode(0);
 		outputObject.setreturnMessage("成功");
 	}
@@ -71,7 +77,6 @@ public class NewsServiceImpl implements NewsService{
 	public void updateNews(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		newsMapper.updateNews(map);
-		System.out.println("===================upda  " + map);
 		outputObject.setreturnCode(0);
 		outputObject.setreturnMessage("修改成功");
 	}
@@ -82,40 +87,9 @@ public class NewsServiceImpl implements NewsService{
 	public void selectSingleNews(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
 		Map<String, Object> singleNews = newsMapper.selectSingleNews(map);
-		System.out.println("==================seleSingle  " + map);
 		outputObject.setBean(singleNews);
 		outputObject.setreturnCode(0);
 		outputObject.setreturnMessage("成功");
-	}
-	
-	
-	
-	/*
-	 * test
-	 */
-	public void test(InputObject inputObject, OutputObject outputObject)
-			throws Exception {
-		List<Map<String, Object>> list = newsMapper.test();
-		outputObject.setBeans(list);
-		outputObject.setreturnCode(0);
-		outputObject.setreturnMessage("成功");
-	}
-	
-	//通过id查找用户
-	public void test1(InputObject inputObject, OutputObject outputObject)
-			throws Exception {
-		//得到输入的参数
-		Map<String, Object> map = inputObject.getParams();
-		//通过数据库查询
-		Map<String, Object> list = newsMapper.test1(map);
-		//将查询到的结果放进outputObject（如果是单个信息，则使用setBean方法放入output
-		//								如果是多个List<>，则使用setBeans方法放入output）
-		outputObject.setBean(list);
-		
-		//设置成功的代码和信息
-		outputObject.setreturnCode(0);
-		outputObject.setreturnMessage("成功");
-		
 	}
 	
 }
