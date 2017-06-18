@@ -3,9 +3,13 @@
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssm.businessManage.news.dao.NewsMapper">
 	
-	
 	<select id="selectAllNews" resultType="map">
-		SELECT * FROM news
+		SELECT * FROM news 
+		<where >
+			<if test=" tempTitle != null and tempTitle!='' ">
+				title LIKE '%${tempTitle}%'
+			</if>
+		</where>
 	</select>
 	
 	<insert id="addNews" parameterType="map">
@@ -22,13 +26,5 @@
 	
 	<select id="selectSingleNews" parameterType="map" resultType="map">
 		SELECT * FROM news WHERE id = #{id}
-	</select>
-	
-	
-	<select id="test" resultType="map">
-		SELECT * FROM user
-	</select>
-	<select id="test1" parameterType="map" resultType="map">
-		SELECT * FROM user WHERE id = #{id}
 	</select>
 </mapper>

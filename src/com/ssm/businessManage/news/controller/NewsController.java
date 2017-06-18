@@ -20,8 +20,8 @@ public class NewsController {
 	private NewsService newsService;
 	
 	/**
-	 * 功能：查询所有新闻
-	 * 参数：pageNum（第几页）， onePageCount（一页有多少条内容）
+	 * 功能：查询所有新闻（支持模糊查询，默认（tempTitle参数为空时）查询全部）
+	 * 参数：pageNum（第几页), onePageCount（一页有多少条内容）,tempTitle(模糊查询时的标题)
 	 */
 	@RequestMapping("/post/news/selectAllNews")
 	@ResponseBody
