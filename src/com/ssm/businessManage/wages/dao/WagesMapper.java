@@ -6,21 +6,15 @@ import java.util.Map;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 
 public interface WagesMapper {
-	//查询所有新闻
-			public List<Map<String, Object>> selectAll11(PageBounds pageBounds) throws Exception;
-			public List<Map<String, Object>> selectAll() throws Exception;
-			
-			//增加
-			public void addWages(Map<String, Object> map) throws Exception;
-			//删除
-			public void deleteWages(Map<String, Object> map) throws Exception;
-			
-			public void updateWages(Map<String, Object> map) throws Exception;
-			
-			
-			//test
-			public List<Map<String, Object>> test() throws Exception;
-			
-			public Map<String, Object> test1(Map<String, Object> map) throws Exception;
+		//查找所有职工薪资
+		public List<Map<String,Object>> selectAllWages(Map<String,Object> map,PageBounds pageBounds) throws Exception;
+		//查找单个职工薪资
+		public Map<String,Object> selectWages(Map<String,Object> map) throws Exception;
+		//增加职工薪资
+		public void addWages(Map<String, Object> map) throws Exception;
+		//删除职工薪资
+		public void deleteWages(Map<String, Object> map) throws Exception;
+		//更新职工薪资	
+		public void updateWages(Map<String, Object> map) throws Exception;
 			
 }

@@ -10,35 +10,34 @@ import com.ssm.businessManage.JobInf.service.JobInfService;
 import com.ssm.businessManage.object.InputObject;
 import com.ssm.businessManage.object.OutputObject;
 
-
 @Controller
 public class JobInfController {
+	
 	@Resource
 	private JobInfService jobInfService;
-	
-	
 	/**
-	 * 功能：查询所有新闻
-	 * 参数：pageNum（第几页）， onePageCount（一页有多少条内容）
+	 *功能：查询所有职工信息（支持模糊查询），默认tempTitle参数为空时，查询所有
+	 *参数：职工姓名
+	 *返回值：按姓名查询的职工信息 
 	 */
-	@RequestMapping("/post/jobInf/selectAll11")
+	@RequestMapping("/post/JobInf/selectAllJobInf")
 	@ResponseBody
-	public void selectAll11(InputObject inputObject,OutputObject outputObject) throws Exception{ 
-		jobInfService.selectAll11(inputObject, outputObject);	
+	public void selectAllJobInf(InputObject inputObject,OutputObject outputObject) throws Exception{
+		jobInfService.selectAllJobInf(inputObject, outputObject);
 	}
 	/**
-	 * 功能：查询所有新闻
-	 * 参数：pageNum（第几页）， onePageCount（一页有多少条内容）
+	 *功能：查询单个职工信息
+	 *参数：职工id
+	 *返回值：单个职工信息 
 	 */
-	@RequestMapping("/post/jobInf/selectAll")
+	@RequestMapping("/post/JobInf/selectJobInf")
 	@ResponseBody
-	public void selectAll(InputObject inputObject,OutputObject outputObject) throws Exception{ 
-		jobInfService.selectAll(inputObject, outputObject);	
+	public void selectJobInf(InputObject inputObject,OutputObject outputObject) throws Exception{
+		jobInfService.selectJobInf(inputObject, outputObject);
 	}
-	
 	/**
-	 * 功能：增加新闻
-	 * 参数：新闻标题，内容，时间
+	 * 功能：增加职员信息
+	 * 参数：职员id、职员姓名（name）、性别（sex）、生日（birthday）、学历（education）、住址（address）、电话号码（telphone）、部门（department）、职位（work）
 	 */
 	@RequestMapping("/post/jobInf/addJobInf")
 	@ResponseBody
@@ -48,7 +47,7 @@ public class JobInfController {
 	
 	/**
 	 * 功能：修改职工信息
-	 * 参数：职工id
+	 * 参数：职工id、职员姓名（name）、性别（sex）、生日（birthday）、学历（education）、住址（address）、电话号码（tellphone）、部门（department）、职位（work） 
 	 */
 	@RequestMapping("/post/jobInf/updateJobInf")
 	@ResponseBody
@@ -57,8 +56,8 @@ public class JobInfController {
 	}
 	
 	/**
-	 * 功能：删除新闻s
-	 * 参数：新闻id
+	 * 功能：删除职员信息
+	 * 参数：职员id
 	 */
 	@RequestMapping("/post/jobInf/deleteJobInf")
 	@ResponseBody

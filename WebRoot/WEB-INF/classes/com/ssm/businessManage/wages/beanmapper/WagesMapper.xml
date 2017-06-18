@@ -2,23 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssm.businessManage.wages.dao.WagesMapper">
-	
-	<select id="selectAll11" resultType="map">
-		SELECT * FROM jobSal
+	<!-- 查询所有职工薪资 -->
+	<select id="selectAllWages" resultType="map">
+		SELECT * FROM jobSal 
+		<where>
+			<if test="tempName != null and tempName!=''">
+				name LIKE '%${tempName}%'
+			</if>
+		</where>
 	</select>
 	
-	<select id="selectAll" resultType="map">
-		SELECT * FROM jobSal
+	<!-- 数据库查询单个员工薪资 -->
+	<select id="selectWages" parameterType="map" resultType="map">
+		SELECT * FROM jobSal WHERE id = #{id}
 	</select>
 	
+	<!-- 数据库添加职工薪资 -->
 	<insert id="addWages" parameterType="map">
 		INSERT INTO jobSal VALUES(null, #{num}, #{name}, #{balansal}, #{jobsal},#{addsal},#{jxsal},#{glsal},#{sum});
 	</insert>
 	
+	<!-- 数据库删除职工薪资 -->
 	<delete id="deleteWages" parameterType="map">
 		DELETE FROM jobSal WHERE id = #{id}
 	</delete>
 	
+	<!-- 数据库更新职工薪资 -->
 	<update id="updateWages" parameterType="map">
 		UPDATE jobSal SET num=#{num}, name=#{name}, balansal=#{balansal}, jobsal=#{jobsal},addsal=#{addsal},jxsal=#{jxsal},glsal=#{glsal},sum=#{sum} where id=#{id}
 	</update>

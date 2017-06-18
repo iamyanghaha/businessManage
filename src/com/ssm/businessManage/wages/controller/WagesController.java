@@ -10,35 +10,31 @@ import com.ssm.businessManage.object.InputObject;
 import com.ssm.businessManage.object.OutputObject;
 import com.ssm.businessManage.wages.service.WagesService;
 
-
 @Controller
 public class WagesController {
+	
 	@Resource
 	private WagesService wagesService;
 	
-	
 	/**
-	 * 功能：查询所有新闻
-	 * 参数：pageNum（第几页）， onePageCount（一页有多少条内容）
+	 *功能：查询所有职工薪资信息（支持模糊查询） 
 	 */
-	@RequestMapping("/post/wages/selectAll11")
+	@RequestMapping("/post/Wages/selectAllWages")
 	@ResponseBody
-	public void selectAll11(InputObject inputObject,OutputObject outputObject) throws Exception{ 
-		wagesService.selectAll11(inputObject, outputObject);	
+	public void selectAllWages(InputObject inputObject,OutputObject outputObject) throws Exception{
+		wagesService.selectAllWages(inputObject, outputObject);
 	}
 	/**
-	 * 功能：查询所有新闻
-	 * 参数：pageNum（第几页）， onePageCount（一页有多少条内容）
+	 * 功能:查找单个职工薪资信息
 	 */
-	@RequestMapping("/post/wages/selectAll")
+	@RequestMapping("/post/Wages/selectWages")
 	@ResponseBody
-	public void selectAll(InputObject inputObject,OutputObject outputObject) throws Exception{ 
-		wagesService.selectAll(inputObject, outputObject);	
+	public void selectWages(InputObject inputObject,OutputObject outputObject) throws Exception{
+		wagesService.selectWages(inputObject, outputObject);
 	}
-	
 	/**
-	 * 功能：增加新闻
-	 * 参数：新闻标题，内容，时间
+	 * 功能：增加职工薪资信息
+	 * 参数：职工工号，姓名，基本工资，岗位工资，加班工资，绩效奖，工龄奖，合计
 	 */
 	@RequestMapping("/post/wages/addWages")
 	@ResponseBody
@@ -48,7 +44,7 @@ public class WagesController {
 	
 	/**
 	 * 功能：修改职工信息
-	 * 参数：职工id
+	 * 参数：职工id，职工工号，姓名，基本工资，岗位工资，加班工资，绩效奖，工龄奖，合计
 	 */
 	@RequestMapping("/post/wages/updateWages")
 	@ResponseBody
@@ -57,8 +53,8 @@ public class WagesController {
 	}
 	
 	/**
-	 * 功能：删除新闻s
-	 * 参数：新闻id
+	 * 功能：删除职工薪资信息
+	 * 参数：职工id
 	 */
 	@RequestMapping("/post/wages/deleteWages")
 	@ResponseBody
