@@ -13,7 +13,6 @@ import com.ssm.businessManage.object.InputObject;
 import com.ssm.businessManage.object.OutputObject;
 import com.ssm.businessManage.wages.dao.WagesMapper;
 import com.ssm.businessManage.wages.service.WagesService;
-import com.sun.accessibility.internal.resources.accessibility;
 
 @Service
 public class WagesServiceImpl implements WagesService{
