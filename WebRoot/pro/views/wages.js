@@ -86,8 +86,6 @@ function eventInit(){
 		var id = $(this).attr("editId");//获取要修改的id（每个标签在数据初始化循环时已经加上各自的id）
 		var params = {
 			id:id,
-			num:1001,
-			name: $("#name").val(),
 			balansal:$("#baseWage").val(),
 			jobsal:$("#postWage").val(),
 			addsal:$("#overtimeWage").val(),
