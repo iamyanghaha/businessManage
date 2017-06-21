@@ -68,18 +68,25 @@
 					<div class="container-fluid">
 						<div class="row-fluid">
 							<div class="add">
-								<a class="btn btn-success" onclick="openadd('新增培训');">新增</a>
+								<!-- <a class="btn btn-success" onclick="openadd('新增培训');">新增</a> -->
+								<a class="btn btn-success" id="addButton" >新增</a>
 								<a class="btn btn-success">打印</a>
 							</div>
 							<div class="page">
-								<a href="#"><img src="../images/08.png" title="首页"/></a>
+								<!-- <a href="#"><img src="../images/08.png" title="首页"/></a>
 								<a href="#"><img src="../images/09.png" title="上一页"/></a>
 								 当前是第&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;共&nbsp;&nbsp;页  
 								<a href="#"><img src="../images/10.png" title="下一页"/></a>
-								<a href="#"><img src="../images/11.png" title="尾页"/></a>
+								<a href="#"><img src="../images/11.png" title="尾页"/></a> -->
+								<a href="#" id="firstPage" class="pageButton" pageNum=1><img src="../images/08.png" title="首页"/></a>
+								<a href="#" id="prePage" class="pageButton" pageNum=""><img src="../images/09.png" title="上一页"/></a>
+								 当前是第<span id="thisPageNum"></span>页&nbsp;&nbsp;&nbsp;&nbsp;共<span id="totalPageNum"></span>页  
+								<a href="#" id="nextPage" class="pageButton" pageNum=""><img src="../images/10.png" title="下一页"/></a>
+								<a href="#" id="lastPage" class="pageButton" pageNum=""><img src="../images/11.png" title="尾页"/></a>
+								<div id="totalId"></div>
 							</div>
 							<div class="search">
-								<input type="text" placeholder="Search" class="seartext"/> <a class="btn btn-success">搜索</a>
+								<input type="text" placeholder="请输入要查询的课程名" id="tempTask" class="seartext"/> <a class="btn btn-success" id="searchButton">搜索</a>
 							</div>
 							<div class="w">
 								<div class="span12">
@@ -94,7 +101,7 @@
 											</tr>
 										</thead>
 										<tbody id="tbody">
-											<tr>
+											<!-- <tr>
 												<td width="20%">标题</td>
 												<td width="10%">讲师</td>
 												<td width="10%">时间</td>
@@ -103,7 +110,7 @@
 													<a class="btn" onclick="openedt('修改培训信息');">修改</a>&nbsp;&nbsp;
 													<a class="btn" onclick="opendel();">删除</a>
 												</td>
-											</tr>
+											</tr> -->
 										</tbody>
 									</table>
 									<div id="page" class="tr"></div>
@@ -138,14 +145,15 @@
 										<div class="control-group">
 											<label class="control-label" for="introduction">简介</label>
 											<div class="controls">
-												<textarea name="train.introduction" style="height:150px;width:205px;resize: none;"></textarea>
+												<textarea name="train.introduction" id="introduction" style="height:150px;width:205px;resize: none;"></textarea>
 											</div>
 										</div>
 									</form>
 								</div>
 								<div class="modal-footer">
-									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+									<button class="btn" id="closeBtn" data-dismiss="modal" aria-hidden="true">关闭</button>
 									<button class="btn btn-primary" id="add" onclick="add();">保存</button>
+									<button class="btn btn-primary" id="edt">保存</button>
 								</div>
 							</div>
 							
@@ -184,7 +192,7 @@
 								</div>
 								<div class="modal-del-footer"><br>
 									<button class="btn btn-primary" id="del" onclick="delnews();">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
-									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+									<button class="btn" data-dismiss="modal" id="cancelDel" aria-hidden="true">关闭</button>
 								</div>
 							</div>
 							
@@ -199,11 +207,29 @@
 		<script src="../scripts/jquery-3.0.0.min.js"></script>
 		<script src="../scripts/behind.js"></script>
 		<script src="../laydate.dev.js"></script>
+		<script src="../scripts/handlebars-v4.0.5.js"></script>
+		<script src="../scripts/main.js"></script>
+		<script src="train.js"></script>
 		<script type="text/javascript">
 			laydate({
 				elem: '#date'
 			});
 		</script>
+		<script id="newsTable" type="text/x-handlebars-template">
+			{{#each rows}}
+			<tr>
+				<td width="20%">{{task}}</td>
+				<td width="10%">{{teacher}}</td>
+				<td width="10%">{{date}}</td>
+				<td width="45%">{{introduction}}</td>
+				<td width="15%">
+					<a class="btn" id="editId" editId="{{id}}" >修改</a>&nbsp;&nbsp;
+					<a class="btn" id="deleteId" deleteId="{{id}}" >删除</a>
+				</td>
+			</tr>
+			{{/each}}
+		</script>
+		
 	</body>
 
 </html>
