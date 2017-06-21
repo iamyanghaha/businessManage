@@ -29,7 +29,7 @@
 	
 	<!-- 数据库更新职工薪资 -->
 	<update id="updateWages" parameterType="map">
-		UPDATE jobSal SET num=#{num}, name=#{name}, balansal=#{balansal}, jobsal=#{jobsal},addsal=#{addsal},jxsal=#{jxsal},glsal=#{glsal},sum=#{sum} where id=#{id}
+		UPDATE jobSal SET balansal=#{balansal}, jobsal=#{jobsal},addsal=#{addsal},jxsal=#{jxsal},glsal=#{glsal},sum=#{sum} where id=#{id}
 	</update>
 	
 </mapper>

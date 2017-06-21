@@ -62,10 +62,17 @@ public class WagesServiceImpl implements WagesService{
 	public void addWages(InputObject inputObject, OutputObject outputObject)
 			throws Exception {
 		Map<String, Object> map = inputObject.getParams();	
-//		double p1 = Double.parseDouble(map.get("base"));
-//		double p1 = Double.parseDouble(map.get("baasd"));
-//		double sum = p1 + ..;
-//		map.put("sum", sum);
+		double s1 = Double.parseDouble( (String)map.get("balansal") );
+		double s2 = Double.parseDouble((String) map.get("jobsal"));
+		double s3 = Double.parseDouble((String) map.get("addsal"));
+		double s4 = Double.parseDouble((String) map.get("jxsal"));
+		double s5 = Double.parseDouble((String) map.get("glsal"));
+		double sum = s1 + s2 + s3 + s4 + s5;
+		map.put("sum", sum);
+		
+		String num = "worker" + (int)(Math.random() * 1000000 + 1);
+		map.put("num", num);
+		
 		wagesMapper.addWages(map);
 		outputObject.setreturnCode(0);
 		outputObject.setreturnMessage("添加成功");
