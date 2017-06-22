@@ -68,19 +68,20 @@
 					<div class="container-fluid">
 						<div class="row-fluid">
 							<div class="add">
-								<a class="btn btn-success" onclick="openadd('新增职员薪资信息');">新增</a>
+								<a class="btn btn-success" id="addButton">新增</a>
 								<a class="btn btn-success">打印</a>
 							</div>
 							<div class="page">
-								<a href="#"><img src="../images/08.png" title="首页" /></a>
-								<a href="#"><img src="../images/09.png" title="上一页" /></a>
-								当前是第&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;共&nbsp;&nbsp;页
-								<a href="#"><img src="../images/10.png" title="下一页" /></a>
-								<a href="#"><img src="../images/11.png" title="尾页" /></a>
+								<a href="#" id="firstPage" class="pageButton" pageNum=1><img src="../images/08.png" title="首页"/></a>
+								<a href="#" id="prePage" class="pageButton" pageNum=""><img src="../images/09.png" title="上一页"/></a>
+								 当前是第<span id="thisPageNum"></span>页&nbsp;&nbsp;&nbsp;&nbsp;共<span id="totalPageNum"></span>页  
+								<a href="#" id="nextPage" class="pageButton" pageNum=""><img src="../images/10.png" title="下一页"/></a>
+								<a href="#" id="lastPage" class="pageButton" pageNum=""><img src="../images/11.png" title="尾页"/></a>
+								<div id="totalId"></div>
 							</div>
 							<div class="search">
-								<input type="text" placeholder="Search" class="seartext" />
-								<a class="btn btn-success">搜索</a>
+								<input type="text" id="tempName" placeholder="Search" class="seartext" />
+								<a id="searchButton" class="btn btn-success">搜索</a>
 							</div>
 							<div class="w">
 								<div class="span12">
@@ -99,7 +100,7 @@
 											</tr>
 										</thead>
 										<tbody id="tbody">
-											<tr>
+											<!-- <tr>
 												<td width="10%">工号</td>
 												<td width="15%">姓名</td>
 												<td width="10%">基本工资</td>
@@ -111,7 +112,7 @@
 												<td width="10%">
 													<a class="btn" onclick="openedt('修改职员薪资信息');">修改</a>&nbsp;&nbsp;
 												</td>
-											</tr>
+											</tr> -->
 										</tbody>
 									</table>
 									<div id="page" class="tr"></div>
@@ -134,38 +135,39 @@
 										<div class="control-group">
 											<label class="control-label" for="baseWage">基本工资</label>
 											<div class="controls">
-												<input type="text" id="wage.baseWage" placeholder="">
+												<input type="text" id="baseWage" placeholder="">
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="postWage">岗位工资</label>
 											<div class="controls">
-												<input type="text" id="wage.postWage" placeholder="">
+												<input type="text" id="postWage" placeholder="">
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="overtimeWage">加班工资</label>
 											<div class="controls">
-												<input type="text" id="wage.overtimeWage" placeholder="">
+												<input type="text" id="overtimeWage" placeholder="">
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="performance">绩效奖</label>
 											<div class="controls">
-												<input type="text" id="wage.performance" placeholder="">
+												<input type="text" id="performance" placeholder="">
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="seniority">工龄奖</label>
 											<div class="controls">
-												<input type="text" id="wage.seniority" placeholder="">
+												<input type="text" id="seniority" placeholder="">
 											</div>
 										</div>
 									</form>
 								</div>
 								<div class="modal-footer">
-									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-									<button class="btn btn-primary" id="add" onclick="add();">保存</button>
+									<button class="btn" data-dismiss="modal" id="closeBtn" aria-hidden="true">关闭</button>
+									<button class="btn btn-primary" id="add" >保存</button>
+									<button class="btn btn-primary" id="edt" >保存</button>
 								</div>
 							</div>
 
@@ -206,6 +208,27 @@
 		<div class="foot"></div>
 		<script src="../scripts/jquery-3.0.0.min.js"></script>
 		<script src="../scripts/behind.js"></script>
+		<script src="../scripts/handlebars-v4.0.5.js"></script>
+		<script src="../scripts/main.js"></script>
+		<script src="../laydate.dev.js"></script>
+		<script src="wages.js"></script>
+		<script id="infTable" type="text/x-handlebars-template">
+			{{#each rows}} 
+			<tr>
+				<td width="10%">{{num}}</td>
+				<td width="15%">{{name}}</td>
+				<td width="10%">{{balansal}}</td>
+				<td width="10%">{{jobsal}}</td>
+				<td width="10%">{{addsal}}</td>
+				<td width="10%">{{jxsal}}</td>
+				<td width="10%">{{glsal}}</td>
+				<td width="15%">{{sum}}</td>
+				<td width="10%">
+					<a class="btn" id="editId" editId="{{id}}" >修改</a>
+				</td>
+			</tr>
+			{{/each}}
+		</script>
 	</body>
 
 </html>
