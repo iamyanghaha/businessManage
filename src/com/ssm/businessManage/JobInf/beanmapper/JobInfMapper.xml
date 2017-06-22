@@ -30,7 +30,7 @@
 	
 	<!-- 数据库更新语句 -->
 	<update id="updateJobInf" parameterType="map">
-		UPDATE jobInf SET name=#{name},sex=#{sex},birthday=#{birthday},education= #{education},tellphone=#{tellphone},work=#{work} where id=#{id}
+		UPDATE jobInf SET name=#{name},sex=#{sex},birthday=#{birthday},education= #{education},address=#{address},tellphone=#{tellphone},department=#{department},work=#{work} where id=#{id}
 	</update>
 	
 </mapper>
